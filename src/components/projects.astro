@@ -1,134 +1,220 @@
 ---
 import { Image } from "astro:assets";
-import semworq from "../../public/semworq.png";
-import Blog from "../../public/Blog.png";
-import peom from "../../public/poem.png";
-import Task from "../../public/Task.png";
+import seamai from "../assets/seamai.png";
+import tutorhub from "../assets/tutorhub.png";
+import studysync from "../assets/studysync.png";
+import semworq from "../assets/semworq.png";
+import Chip from "./chip.astro";
 
 interface Project {
   title: string;
-  image: ImageMetadata;
-  link: string;
-  preview: string;
-  status: string;
+  tagline: string;
+  image?: ImageMetadata;
+  live?: string;
+  repo?: string;
+  points: string[];
+  stack: string[];
+  fit?: "cover" | "contain";
 }
 
-const projects: Project[] = [
+const featured: Project[] = [
   {
-    title: "Poem-Heaven",
-    image: peom as ImageMetadata,
-    link: "https://github.com/Mesay-AK/poem-frontEnd",
-    preview: "https://github.com/Mesay-AK/poem-frontEnd/blob/main/README.md",
-    status: "On Development",
+    title: "SeamAi",
+    tagline: "AI meeting intelligence platform",
+    image: seamai,
+    live: "https://seam-ai-web-dashboard-2.onrender.com/",
+    points: [
+      "Async meeting pipeline: audio upload, AI engine dispatch and webhook callbacks that persist transcripts, tasks and blockers.",
+      "Real-time task and notification events over Socket.IO with JWT auth and user/project rooms.",
+      "Task lifecycle state machine with RBAC and human-in-the-loop approval; GitHub, Jira and Google OAuth integrations.",
+    ],
+    stack: ["NestJS", "TypeScript", "Prisma", "PostgreSQL", "Redis", "Socket.IO", "FastAPI"],
   },
   {
-    title: "Task-Manager",
-    image: Task as ImageMetadata,
-    link: "https://github.com/Mesay-AK/ProjectPhase-Backend-learnng-Path/tree/main/Task8-testing",
-    preview: "https://documenter.getpostman.com/view/29564648/2sA3s3GqWn",
-    status: "On Development",
-
+    title: "StudySync",
+    tagline: "Real-time collaborative study platform",
+    image: studysync,
+    live: "https://studysync-frontend-1.onrender.com/",
+    points: [
+      "Direct and group messaging on WebSocket rooms, with typing indicators, online presence and notifications.",
+      "JWT and Google OAuth authentication with Redis-backed sessions.",
+      "Scalable backend structure with middleware and socket handlers behind a responsive web client.",
+    ],
+    stack: ["Node.js", "Express", "Socket.IO", "MongoDB", "Redis", "React"],
   },
-
   {
-
+    title: "Tutor Hub",
+    tagline: "Tutor and student scheduling platform",
+    image: tutorhub,
+    live: "https://tutorhub-frontend.onrender.com/",
+    points: [
+      "Role-based platform connecting students and teachers, with authentication and session management.",
+      "Google Calendar scheduling with automatic Google Meet link generation.",
+      "Designed the REST APIs and database schema end to end.",
+    ],
+    stack: ["React", "Node.js", "Express", "MongoDB"],
+  },
+  {
     title: "Sem & Worq",
-    image: semworq as ImageMetadata,
-    link: "https://github.com/Mesay-AK/Sem-Worq/tree/main/back-end",
-    preview: "https://github.com/Mesay-AK/Sem-Worq/tree/main/back-end/Documentation",
-    status: "On Development",
-
+    tagline: "Portfolio and blog management web app",
+    image: semworq,
+    live: "https://sem-ena-worq.onrender.com/",
+    repo: "https://github.com/Mesay-AK/Sem-Worq",
+    points: [
+      "Led a team of 6 developers while owning backend architecture and implementation.",
+      "RESTful APIs with JWT authentication and secure password hashing.",
+      "Scalable MongoDB schemas and reusable backend architecture, covered by Jest tests.",
+    ],
+    stack: ["Node.js", "Express", "MongoDB", "Jest"],
   },
-
 ];
+
+const more: Project[] = [
+  {
+    title: "Recipe Platform",
+    tagline: "Go, GraphQL, Hasura and PostgreSQL",
+    points: ["Schema design, filtered and paginated GraphQL queries, auth, image upload and a mock payment flow."],
+    stack: ["Go", "GraphQL", "Hasura", "PostgreSQL"],
+  },
+  {
+    title: "Neuroevolution Benchmark",
+    tagline: "Research: GA, PSO and SA vs PPO",
+    points: ["Compared metaheuristics against PPO in sparse-reward RL, evaluated with statistical significance tests."],
+    stack: ["Python", "PyTorch", "OpenAI Gym"],
+  },
+];
+
+const ghIcon =
+  "M12.001 2C6.47598 2 2.00098 6.475 2.00098 12C2.00098 16.425 4.86348 20.1625 8.83848 21.4875C9.33848 21.575 9.52598 21.275 9.52598 21.0125C9.52598 20.775 9.51348 19.9875 9.51348 19.15C7.00098 19.6125 6.35098 18.5375 6.15098 17.975C6.03848 17.6875 5.55098 16.8 5.12598 16.5625C4.77598 16.375 4.27598 15.9125 5.11348 15.9C5.90098 15.8875 6.46348 16.625 6.65098 16.925C7.55098 18.4375 8.98848 18.0125 9.56348 17.75C9.65098 17.1 9.91348 16.6625 10.201 16.4125C7.97598 16.1625 5.65098 15.3 5.65098 11.475C5.65098 10.3875 6.03848 9.4875 6.67598 8.7875C6.57598 8.5375 6.22598 7.5125 6.77598 6.1375C6.77598 6.1375 7.61348 5.875 9.52598 7.1625C10.326 6.9375 11.176 6.825 12.026 6.825C12.876 6.825 13.726 6.9375 14.526 7.1625C16.4385 5.8625 17.276 6.1375 17.276 6.1375C17.826 7.5125 17.476 8.5375 17.376 8.7875C18.0135 9.4875 18.401 10.375 18.401 11.475C18.401 15.3125 16.0635 16.1625 13.8385 16.4125C14.201 16.725 14.5135 17.325 14.5135 18.2625C14.5135 19.6 14.501 20.675 14.501 21.0125C14.501 21.275 14.6885 21.5875 15.1885 21.4875C19.1385 20.1625 22.001 16.4125 22.001 12C22.001 6.475 17.526 2 12.001 2Z";
+const arrowIcon =
+  "M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z";
+
+const btn =
+  "inline-flex items-center gap-2 text-sm px-4 py-2 rounded-full border border-[var(--white-icon-tr)] bg-[#1414149c] text-[var(--white-icon)] hover:text-white hover:border-[var(--sec)] transition duration-300";
 ---
 
 <section
   id="projects"
   class="py-12 border-t border-[#ffffff10] text-[var(--white)]"
 >
-  <div class="max-w-5xl mx-auto">
-    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">My work</h2>
-    <h3 class="text-4xl md:text-5xl font-medium mb-8">Projects</h3>
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">Shipped, end to end</h2>
+    <h3 class="text-4xl md:text-5xl font-semibold mb-3 gradient-text w-fit">Projects</h3>
+    <p class="text-[var(--white-icon)] mb-8 max-w-2xl">
+      Real products with a UI, an API, a database and a deployment. Each live
+      demo is hosted on a free tier, so the first load can take a few seconds
+      to wake up.
+    </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {
-        projects.map((project) => (
-          <div class="group">
+        featured.map((p) => (
+          <article class="card group flex flex-col rounded-2xl overflow-hidden">
             <a
-              href={project.preview}
+              href={p.live}
               target="_blank"
               rel="noopener noreferrer"
-              class="block"
+              aria-label={`Open ${p.title} live demo`}
+              class="block overflow-hidden bg-[#1a1a1a]"
             >
-              <div class="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-4">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  class="w-full h-48 md:h-72 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div class="flex items-center px-3">
-                <div class="flex-grow">
-                  <h4 class="text-2xl font-semibold">{project.title}</h4>
-                  <span class="py-1 text-sm text-[var(--white-icon)]">
-                    {project.status}
-                  </span>
-                </div>
-                <div class="flex gap-2 ml-auto">
-                  <a
-                    target="_blank"
-                    href={project.link}
-                    aria-label="GitHub"
-                    class="size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      class="size-7"
-                    >
-                      <path d="M24 12L18.3431 17.6569L16.9289 16.2426L21.1716 12L16.9289 7.75736L18.3431 6.34315L24 12ZM2.82843 12L7.07107 16.2426L5.65685 17.6569L0 12L5.65685 6.34315L7.07107 7.75736L2.82843 12ZM9.78845 21H7.66009L14.2116 3H16.3399L9.78845 21Z" />
-                    </svg>
-                  </a>
-                  <a
-                    target="_blank"
-                    href={project.preview}
-                    aria-label="Preview"
-                    class="size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      class="size-7"
-                    >
-                      <path d="M16.0037 9.41421L7.39712 18.0208L5.98291 16.6066L14.5895 8H7.00373V6H18.0037V17H16.0037V9.41421Z" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
+              <Image
+                src={p.image!}
+                alt={`${p.title} homepage screenshot`}
+                width={900}
+                class:list={[
+                  "w-full h-48 md:h-56 group-hover:scale-105 transition-transform duration-500",
+                  p.fit === "contain" ? "object-contain p-4" : "object-cover object-top",
+                ]}
+              />
             </a>
-          </div>
+            <div class="flex flex-col flex-grow p-5 gap-3">
+              <div>
+                <h4 class="text-2xl font-semibold">{p.title}</h4>
+                <p class="text-sm text-[var(--sec)]">{p.tagline}</p>
+              </div>
+              <ul class="space-y-2 text-sm text-[var(--white-icon)] list-disc pl-5">
+                {p.points.map((pt) => <li>{pt}</li>)}
+              </ul>
+              <ul class="flex flex-wrap gap-2 mt-1">
+                {
+                  p.stack.map((s) => <Chip name={s} />)
+                }
+              </ul>
+              <div class="flex flex-wrap gap-2 mt-auto pt-3">
+                {
+                  p.live && (
+                    <a href={p.live} target="_blank" rel="noopener noreferrer" class={btn}>
+                      Live demo
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="size-4">
+                        <path d={arrowIcon} />
+                      </svg>
+                    </a>
+                  )
+                }
+                {
+                  p.repo && (
+                    <a href={p.repo} target="_blank" rel="noopener noreferrer" class={btn}>
+                      Code
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="size-4">
+                        <path d={ghIcon} />
+                      </svg>
+                    </a>
+                  )
+                }
+              </div>
+            </div>
+          </article>
         ))
       }
     </div>
+
+    <h4 class="text-2xl font-medium mt-14 mb-5">More work</h4>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {
+        more.map((p) => (
+          <article class="card rounded-2xl p-5 flex flex-col gap-2">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h5 class="text-lg font-semibold">{p.title}</h5>
+                <p class="text-xs text-[var(--sec)]">{p.tagline}</p>
+              </div>
+              <div class="flex gap-2 shrink-0">
+                {
+                  p.repo && (
+                    <a href={p.repo} target="_blank" rel="noopener noreferrer" aria-label={`${p.title} source`} class="text-[var(--white-icon)] hover:text-white transition">
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="size-6"><path d={ghIcon} /></svg>
+                    </a>
+                  )
+                }
+                {
+                  p.live && (
+                    <a href={p.live} target="_blank" rel="noopener noreferrer" aria-label={`${p.title} docs`} class="text-[var(--white-icon)] hover:text-white transition">
+                      <svg viewBox="0 0 24 24" fill="currentColor" class="size-6"><path d={arrowIcon} /></svg>
+                    </a>
+                  )
+                }
+              </div>
+            </div>
+            <p class="text-sm text-[var(--white-icon)]">{p.points[0]}</p>
+            <ul class="flex flex-wrap gap-2 mt-1">
+              {
+                p.stack.map((s) => <Chip name={s} />)
+              }
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
     <a
       target="_blank"
       href="https://github.com/Mesay-AK"
       aria-label="GitHub"
-      class="w-full flex items-center justify-center gap-2 mt-9 text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-[var(--white-icon-tr)] p-3 rounded-full bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
+      class="w-full flex items-center justify-center gap-2 mt-9 text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-[var(--white-icon-tr)] p-3 rounded-full bg-[#1414149c]"
     >
       <span class="md:text-lg text-md">More projects on</span>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        class="size-6"
-      >
-        <path
-          d="M12.001 2C6.47598 2 2.00098 6.475 2.00098 12C2.00098 16.425 4.86348 20.1625 8.83848 21.4875C9.33848 21.575 9.52598 21.275 9.52598 21.0125C9.52598 20.775 9.51348 19.9875 9.51348 19.15C7.00098 19.6125 6.35098 18.5375 6.15098 17.975C6.03848 17.6875 5.55098 16.8 5.12598 16.5625C4.77598 16.375 4.27598 15.9125 5.11348 15.9C5.90098 15.8875 6.46348 16.625 6.65098 16.925C7.55098 18.4375 8.98848 18.0125 9.56348 17.75C9.65098 17.1 9.91348 16.6625 10.201 16.4125C7.97598 16.1625 5.65098 15.3 5.65098 11.475C5.65098 10.3875 6.03848 9.4875 6.67598 8.7875C6.57598 8.5375 6.22598 7.5125 6.77598 6.1375C6.77598 6.1375 7.61348 5.875 9.52598 7.1625C10.326 6.9375 11.176 6.825 12.026 6.825C12.876 6.825 13.726 6.9375 14.526 7.1625C16.4385 5.8625 17.276 6.1375 17.276 6.1375C17.826 7.5125 17.476 8.5375 17.376 8.7875C18.0135 9.4875 18.401 10.375 18.401 11.475C18.401 15.3125 16.0635 16.1625 13.8385 16.4125C14.201 16.725 14.5135 17.325 14.5135 18.2625C14.5135 19.6 14.501 20.675 14.501 21.0125C14.501 21.275 14.6885 21.5875 15.1885 21.4875C19.259 20.1133 21.9999 16.2963 22.001 12C22.001 6.475 17.526 2 12.001 2Z"
-        ></path>
+      <svg viewBox="0 0 24 24" fill="currentColor" class="size-6">
+        <path d={ghIcon} />
       </svg>
     </a>
   </div>

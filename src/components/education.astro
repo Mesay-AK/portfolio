@@ -1,0 +1,25 @@
+---
+const education = [
+  { title: "BSc Software Engineering", org: "Addis Ababa University", when: "2022 - 2026" },
+  { title: "Data Structures & Algorithms", org: "A2SV (Africa to Silicon Valley)", when: "2023 - 2024", note: "700+ LeetCode problems solved" },
+  { title: "Full-Stack Web Development Bootcamp", org: "Evangadi Tech", when: "2023 - Feb 2024", note: "MERN stack" },
+];
+---
+
+<section id="education" class="py-12 border-t border-[#ffffff10] text-[var(--white)]">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">Where I studied</h2>
+    <h3 class="text-4xl md:text-5xl font-semibold mb-8 gradient-text w-fit">Education</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {
+        education.map((e) => (
+          <div class="card rounded-2xl p-5">
+            <p class="font-semibold">{e.title}</p>
+            <p class="text-sm text-[var(--sec)]">{e.org}</p>
+            <p class="text-sm text-[var(--white-icon)] mt-2">{e.when}{e.note ? ` · ${e.note}` : ""}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

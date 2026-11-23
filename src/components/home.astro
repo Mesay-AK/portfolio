@@ -5,26 +5,29 @@ import SkillsList from "../React/SkillsList.tsx";
 ---
 
 <section class="text-[var(--white)] mt-12 md:mt-0" id="home">
-  <div class="max-w-5xl mx-auto space-y-8 md:py-36 pb-14">
+  <div class="max-w-6xl mx-auto space-y-8 pt-6 md:pt-32 md:pb-20 pb-10">
     <div class="text-left space-y-4">
-      <p class="text-md md:text-lg text-[var(--white-icon)] shiny-white">
-        Hi, I'm Mesay Abebe
+      <p class="inline-flex items-center gap-2 text-sm md:text-base text-[var(--white)] border border-[#a476ff40] bg-[#a476ff14] rounded-full px-4 py-1.5">
+        <span class="relative flex size-2"><span class="absolute inline-flex size-full rounded-full bg-emerald-400 opacity-75 animate-ping"></span><span class="relative inline-flex size-2 rounded-full bg-emerald-400"></span></span>
+        Mesay Abebe · Open to work
       </p>
       <div
         class="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-8 md:gap-4"
       >
         <h1
-          class="text-[var(--white)] text-5xl md:text-6xl font-medium text-pretty leading-none"
+          class="gradient-text text-5xl md:text-7xl font-semibold text-pretty leading-[1.02] pb-1"
         >
-          Software <br /> Developer
+          Software <br /> Engineer
         </h1>
         <p class="text-md md:text-2xl text-[var(--white-icon)]">
-          Turning challenges into elegant solutions—one line at a time. I build the foundations that bring ideas to life through thoughtful and efficient <span class="text-[var(--sec)] shiny-sec"
-            >Backend</span
-          > development.
+          I design and ship complete products: React interfaces, real-time APIs, and the databases and background jobs behind them. Currently building a <span class="text-[var(--sec)] shiny-sec">medical case management platform</span> at Clarity Med Legal, and I work as a Product Manager at Eskolx Labs.
         </p>
       </div>
-      <div class="flex justify-start gap-2 pt-3 md:pt-6">
+      <div class="flex flex-wrap items-center gap-3 pt-3 md:pt-6">
+        <a href="#projects" class="px-5 py-3 rounded-xl bg-[var(--sec)] text-[var(--background)] font-medium hover:-translate-y-0.5 shadow-[0_10px_30px_-8px_#a476ff99] transition">View projects</a>
+        <a href="/Mesay_Abebe_Resume.pdf" target="_blank" rel="noopener" class="px-5 py-3 rounded-xl border border-[var(--white-icon-tr)] bg-[#ffffff0a] text-[var(--white)] hover:border-[var(--sec)] hover:-translate-y-0.5 transition">Download CV</a>
+      </div>
+      <div class="flex justify-start gap-2 pt-1">
         <a
           target="_blank"
           href="https://github.com/Mesay-AK"
@@ -61,7 +64,7 @@ import SkillsList from "../React/SkillsList.tsx";
         </a>
         <a
           target="_blank"
-          href="https://mail.google.com/mail/?view=cm&fs=1&to=mesay7964@gmail.com&su=Hey%20Mesay!"
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=kabetomesay@gmail.com&su=Hey%20Mesay!"
           aria-label="Email"
           class="text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
         >
@@ -85,7 +88,7 @@ import SkillsList from "../React/SkillsList.tsx";
     <div class="flex flex-col lg:flex-row items-center gap-8">
       <SkillsList client:load />
       <div
-        class="flex justify-center md:w-full md:h-[292px] size-[290px] pt-3 md:pt-9 md:ml-16"
+        class="flex justify-center w-full h-[240px] md:h-[292px] pt-3 md:pt-9 lg:ml-12 overflow-hidden rounded-2xl"
       >
         <LetterGlitch
           client:load

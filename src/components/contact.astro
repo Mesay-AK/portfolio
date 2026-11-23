@@ -1,14 +1,18 @@
 <section id="contact" class="w-full py-12 border-t border-[#ffffff10]">
-  <div class="max-w-5xl mx-auto">
+  <div class="max-w-6xl mx-auto">
     <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">Let's talk</h2>
-    <h3 class="text-4xl md:text-5xl font-medium text-[var(--white)] mb-6">
+    <h3 class="text-4xl md:text-5xl font-semibold gradient-text w-fit mb-6">
       Contact
     </h3>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div class="text-[var(--white-icon)]">
         <p class="mb-4">
-          Have a question or a project in mind? Feel free to reach out.
+          I'm open to software engineering roles, and to freelance projects. Send a note and I'll reply soon.
         </p>
+        <div class="flex items-center gap-2 mb-2">
+          <span>Email:</span>
+          <a href="mailto:kabetomesay@gmail.com" class="text-[var(--white)] hover:text-[var(--sec)] transition break-all">kabetomesay@gmail.com</a>
+        </div>
         <div class="flex items-center gap-2">
           <span>Location:</span>
           <span class="text-[var(--white)]">Addis Ababa, Ethiopia</span>
@@ -18,34 +22,32 @@
       <div>
         <form
           id="contact-form"
-          action="mailto:mesay7964@gmail.com"
-          method="GET"
-          class="flex flex-col gap-4"
+                    class="card flex flex-col gap-4 p-6 rounded-2xl"
         >
           <input
             type="text"
-            name="subject"
+            name="name"
             placeholder="Name"
             required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
+            class="px-4 py-2 bg-[#0d0d0d99] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
           />
           <input
             type="email"
-            name="cc"
+            name="email"
             placeholder="Email"
             required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
+            class="px-4 py-2 bg-[#0d0d0d99] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
           />
           <textarea
-            name="body"
+            name="message"
             placeholder="Message"
             rows="6"
             required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"
+            class="px-4 py-2 bg-[#0d0d0d99] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"
           ></textarea>
           <button
             type="submit"
-            class="px-4 py-2 bg-[var(--white-icon-tr)] text-[var(--white)] rounded-lg opacity-60 transition-opacity border border-[var(--white-icon-tr)] hover:opacity-100 hover:bg-[var(--white-icon-tr)]"
+            class="px-4 py-3 rounded-lg bg-[var(--sec)] text-[var(--background)] font-medium hover:opacity-90 transition"
           >
             Submit
           </button>
@@ -67,9 +69,11 @@
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+    const d = new FormData(form);
+    const body = `${d.get("message")}\n\n${d.get("name")} (${d.get("email")})`;
+    const url = `mailto:kabetomesay@gmail.com?subject=${encodeURIComponent("Portfolio message from " + d.get("name"))}&body=${encodeURIComponent(body)}`;
     formMessage.classList.remove("hidden");
-    setTimeout(() => {
-      form.submit(); // Opens default mail client
-    }, 1000);
+    formMessage.classList.add("flex");
+    setTimeout(() => { window.location.href = url; }, 600);
   });
 </script>

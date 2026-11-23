@@ -1,0 +1,11 @@
+---
+import { iconFor } from "../data/tech";
+interface Props { name: string }
+const { name } = Astro.props;
+const t = iconFor(name);
+---
+
+<li class="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full border border-[#a476ff33] bg-[#a476ff14] text-[#d9c8ff]">
+  {t?.icon && <img src={`/svg/${t.icon}.svg`} alt="" width="14" height="14" loading="lazy" class:list={["size-3.5 object-contain", t.mono && "brightness-0 invert opacity-80"]} />}
+  {name}
+</li>

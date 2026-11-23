@@ -1,0 +1,85 @@
+---
+import Chip from "./chip.astro";
+const jobs = [
+  {
+    role: "Product Manager",
+    org: "Eskolx Labs",
+    url: undefined as string | undefined,
+    when: "Nov 2026 - Present · Remote, part-time",
+    stack: ["Roadmapping", "Prioritization", "User Stories", "Stakeholder Alignment"],
+    points: [
+      "Define product vision and maintain the roadmap, balancing user needs against business goals and technical constraints.",
+      "Gather and synthesize user and stakeholder feedback into clear requirements, user stories and acceptance criteria.",
+      "Prioritize and groom the backlog; plan sprints and keep engineering and design aligned on scope.",
+      "Partner with engineers and designers through delivery, unblocking decisions and reviewing work before release.",
+      "Track success metrics after launch and use the results to decide what to build next.",
+    ],
+  },
+  {
+    role: "Backend Engineer",
+    org: "Clarity Med Legal",
+    url: "https://www.linkedin.com/company/clarity-med-legal",
+    when: "May 2025 - Present · Remote, part-time",
+    stack: ["Node.js", "TypeScript", "Express", "PostgreSQL", "Docker", "Vitest"],
+    points: [
+      "Designed and built REST APIs for a medical personal-injury case management platform using clean architecture.",
+      "Implemented JWT authentication, MFA (TOTP) and role-based access control.",
+      "Owned PostgreSQL schema migrations, complex queries and multi-model relationships.",
+      "Shipped production features with Docker, background job scheduling and structured error handling; wrote Vitest unit tests.",
+      "Worked with frontend developers on API integration and validation, debugging issues across the stack.",
+    ],
+  },
+  {
+    role: "Backend Developer Intern",
+    org: "Booking Tech",
+    url: "https://www.linkedin.com/company/booking-technologies",
+    when: "Mar 2025 - Jun 2025",
+    stack: ["Node.js", "Express"],
+    points: [
+      "Built authentication flows and API endpoints for a news and financial services platform.",
+      "Integrated external APIs and background data updates.",
+    ],
+  },
+  {
+    role: "Backend Developer Intern",
+    org: "A2SV",
+    url: "https://www.linkedin.com/company/a2sv",
+    when: "Oct 2024 - Dec 2024",
+    stack: ["Go"],
+    points: [
+      "Built a task-management API with authentication and CRUD operations, using a modular architecture.",
+    ],
+  },
+];
+
+---
+
+<section id="experience" class="py-12 border-t border-[#ffffff10] text-[var(--white)]">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">Engineering and product</h2>
+    <h3 class="text-4xl md:text-5xl font-semibold mb-8 gradient-text w-fit">Experience</h3>
+
+    <ol class="relative border-l border-[#a476ff40] ml-2 space-y-6">
+      {
+        jobs.map((j) => (
+          <li class="card rounded-2xl p-5 md:p-6 ml-6 relative">
+            <span class="absolute -left-[33px] top-7 size-3 rounded-full bg-[var(--sec)] ring-4 ring-[#a476ff30]" />
+            <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1">
+              <h4 class="text-xl font-semibold">
+                {j.role} ·{" "}
+                {j.url ? <a href={j.url} target="_blank" rel="noopener noreferrer" class="text-[var(--sec)] hover:underline">{j.org}</a> : <span class="text-[var(--sec)]">{j.org}</span>}
+              </h4>
+              <span class="text-sm text-[var(--white-icon)]">{j.when}</span>
+            </div>
+            <ul class="mt-3 space-y-1.5 text-[var(--white-icon)] list-disc pl-5 text-sm md:text-base">
+              {j.points.map((p) => <li>{p}</li>)}
+            </ul>
+            <ul class="flex flex-wrap gap-2 mt-3">
+              {j.stack.map((s) => <Chip name={s} />)}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

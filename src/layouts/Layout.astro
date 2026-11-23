@@ -7,16 +7,14 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Software Developer" />
+    <meta name="description" content="Mesay Abebe is a software engineer and product manager building React front ends, real-time Node.js and Go APIs, and PostgreSQL/MongoDB backends." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta property="og:title" content="Mesay Abebe" />
-    <meta property="og:description" content="Software Developer" />
-    <meta property="og:image" content="https://investin.org/cdn/shop/articles/software-engineering-skills_resize_md.jpg?v=1634293058" />
-    <meta property="og:url" content="https://oscarhernandez.vercel.app" />
+    <meta property="og:title" content="Mesay Abebe | Software Engineer" />
+    <meta property="og:description" content="Software engineer and product manager: React, Node.js, NestJS, Go, PostgreSQL." />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Mesay Abebe Portfolio" />
 
@@ -42,8 +40,21 @@ const { title } = Astro.props;
 
     <title>{title}</title>
   </head>
-  <body class="bg-[--background] md:px-48 lg:px-20 px-9">
+  <body class="bg-[--background] px-5 sm:px-8 lg:px-12">
+    <div class="bg-aurora" aria-hidden="true"></div>
     <slot />
+    <script is:inline>
+      document.documentElement.classList.add("js");
+      const io = new IntersectionObserver(
+        (es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }),
+        { threshold: 0.08 }
+      );
+      document.querySelectorAll(".card, h3, h2").forEach((el, i) => {
+        el.classList.add("reveal");
+        el.style.transitionDelay = (i % 3) * 70 + "ms";
+        io.observe(el);
+      });
+    </script>
   </body>
 </html>
 
@@ -65,6 +76,75 @@ const { title } = Astro.props;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+  }
+
+  body {
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    color: var(--white);
+  }
+
+  /* ambient background: soft violet glows + faint grid */
+  .bg-aurora {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(600px circle at 15% -5%, #a476ff2e, transparent 60%),
+      radial-gradient(700px circle at 100% 30%, #4f7cff1c, transparent 60%),
+      radial-gradient(600px circle at 0% 90%, #a476ff1a, transparent 60%);
+  }
+  .bg-aurora::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(#ffffff08 1px, transparent 1px),
+      linear-gradient(90deg, #ffffff08 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+  }
+
+  /* glass card with cursor-free hover glow */
+  .card {
+    background: linear-gradient(160deg, #ffffff0d, #ffffff04);
+    border: 1px solid #ffffff14;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 0 #ffffff10 inset, 0 20px 40px -24px #000;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease,
+      opacity 0.7s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: #a476ff66;
+    box-shadow: 0 1px 0 #ffffff14 inset, 0 24px 50px -20px #a476ff55;
+  }
+
+  .gradient-text {
+    background: linear-gradient(120deg, #fff 10%, #c9b0ff 45%, #7ea2ff 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  html.js .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+  html.js .card.reveal.in:hover {
+    transform: translateY(-4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.js .reveal { opacity: 1; transform: none; transition: none; }
+    .card, .card:hover { transition: none; transform: none; }
   }
 
   *::selection {
